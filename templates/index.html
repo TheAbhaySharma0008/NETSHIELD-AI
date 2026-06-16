@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>NetShield AI</title>
+
+    <style>
+
+        body{
+            font-family: Arial;
+            margin:40px;
+            background:#f4f6f8;
+        }
+
+        h1{
+            color:#1e3a5f;
+        }
+
+        .card{
+            display:inline-block;
+            padding:20px;
+            margin:10px;
+            background:white;
+            border-radius:10px;
+            box-shadow:0 0 10px rgba(0,0,0,0.1);
+            min-width:180px;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            background:white;
+        }
+
+        th,td{
+            border:1px solid #ddd;
+            padding:10px;
+            text-align:left;
+        }
+
+        th{
+            background:#1e3a5f;
+            color:white;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<h1>🛡 NetShield AI Dashboard</h1>
+<h2>Threat Level: {{ threat_level }}</h2>
+
+<div class="card">
+    <h2>{{ total_alerts }}</h2>
+    <p>Total Alerts</p>
+</div>
+
+<div class="card">
+    <h2>{{ high_alerts }}</h2>
+    <p>High Alerts</p>
+</div>
+
+<div class="card">
+    <h2>{{ critical_alerts }}</h2>
+    <p>Critical Alerts</p>
+</div>
+
+<h2>Recent Alerts</h2>
+
+<table>
+
+<tr>
+    <th>ID</th>
+    <th>Time</th>
+    <th>Type</th>
+    <th>Source IP</th>
+    <th>Severity</th>
+    <th>Details</th>
+</tr>
+
+{% for alert in alerts %}
+
+<tr>
+    <td>{{ alert.id }}</td>
+    <td>{{ alert.time }}</td>
+    <td>{{ alert.alert_type }}</td>
+    <td>{{ alert.source_ip }}</td>
+    <td>
+
+{% if alert.severity == "CRITICAL" %}
+<span style="color:red;font-weight:bold;">
+    {{ alert.severity }}
+</span>
+
+{% elif alert.severity == "HIGH" %}
+<span style="color:orange;font-weight:bold;">
+    {{ alert.severity }}
+</span>
+
+{% else %}
+{{ alert.severity }}
+
+{% endif %}
+
+</td>
+    <td>{{ alert.details }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+</html>
