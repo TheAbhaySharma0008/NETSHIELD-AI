@@ -5,8 +5,8 @@ from alerts import generate_alert
 
 attempt_tracker = defaultdict(list)
 
-TIME_WINDOW = 30
-ATTEMPT_THRESHOLD = 5
+TIME_WINDOW = 60
+ATTEMPT_THRESHOLD = 20
 
 alerted_ips = set()
 
